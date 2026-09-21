@@ -15,8 +15,8 @@ export function SiteNav({ d, locale }: { d: Dict; locale: Locale }) {
           style={{ fontFamily: "var(--font-display)" }}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/beto-logo.png" alt="" aria-hidden className="h-8 w-8 rounded-full" />
-          <span className="text-lg">Beto</span>
+          <img src="/beto-logo.png" alt="" aria-hidden className="h-10 w-10 rounded-full" />
+          <span className="text-xl">Beto</span>
         </Link>
         <div className="flex items-center gap-2 sm:gap-4">
           <Link

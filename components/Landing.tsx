@@ -37,6 +37,12 @@ export default function Landing({ locale }: { locale: Locale }) {
         {/* ── Hero: split asimétrico, demo real a la derecha ────────────── */}
         <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 pb-16 pt-10 sm:pt-14 lg:grid-cols-[1.1fr_1fr] lg:gap-14 lg:pb-20">
           <div className="rise-in">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/beto-logo.png"
+              alt="Beto"
+              className="mb-5 h-20 w-20 rounded-full sm:h-24 sm:w-24"
+            />
             <h1 className="text-[2.35rem] font-bold leading-[1.08] sm:text-5xl lg:text-6xl">
               {d.hero.titleA}
               <br />

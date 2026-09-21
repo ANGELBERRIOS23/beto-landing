@@ -108,16 +108,16 @@ export const DICT = {
       ],
     },
     alliance: {
-      badge: "Programa Economía Plateada",
+      badge: "Fintech de Guatemala",
       title: "Una alianza para cuidar a quienes más quiere",
-      body: "Beto nace dentro de la Economía Plateada —el enfoque que pone a las personas mayores de 50 en el centro— como una iniciativa de TuConsejería AI para protegerlas del fraude digital en el momento justo: antes del clic.",
+      body: "Beto es una iniciativa de TuConsejería AI dentro del ecosistema fintech de Guatemala, para proteger a las personas mayores de 50 del fraude digital en el momento justo: antes del clic.",
       role_tuconsejeria: "Inteligencia artificial y experiencia conversacional",
       role_tubanc: "Respaldo financiero y cercanía con las personas",
       cta: "Conocer más",
     },
     stats: {
       title: "Por qué importa",
-      source: "Piloto de la Economía Plateada · Guatemala.",
+      source: "Piloto de Beto · Fintech de Guatemala.",
       items: [
         { n: "Segundos", label: "es lo que tarda Beto en revisar un mensaje o enlace por usted" },
         { n: "Sus quetzales", label: "protegidos: le avisamos antes de que entregue sus datos o su dinero" },
