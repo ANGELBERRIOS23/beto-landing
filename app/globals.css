@@ -1,0 +1,120 @@
+@import "tailwindcss";
+
+/* ── Tokens TuConfIA ─────────────────────────────────────────────────────────
+   Estilo WhatsApp: acento verde (teal #008069 claro / #00A884 oscuro) y zona
+   de chat con fondo y burbujas como la app. Rojo/ámbar SOLO como estado
+   semántico del semáforo.
+   Radios documentados: botones = pill, tarjetas = 16px (rounded-2xl),
+   inputs = 8px (rounded-lg).
+   Tema: manual (toggle) con data-theme en <html>; el script del layout lo
+   resuelve antes de pintar (localStorage → preferencia del sistema). */
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-atkinson), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --surface: #f7f5f3;
+  --surface-raised: #ffffff;
+  --ink: theme(--color-zinc-900);
+  --ink-soft: theme(--color-zinc-600);
+  --line: theme(--color-zinc-200);
+  --accent: #008069;            /* verde WhatsApp (UI) */
+  --accent-strong: #00a884;
+  --accent-ink: #ffffff;
+  /* Zona de chat (como WhatsApp claro) */
+  --chat-bg: #efe7dd;
+  --chat-dots: rgba(60, 40, 20, 0.06);
+  --bubble-in: #ffffff;
+  --bubble-in-ink: theme(--color-zinc-900);
+  --bubble-out: #d9fdd3;
+  --bubble-out-ink: #0b3d2e;
+  --tick: #53bdeb;              /* doble check azul */
+}
+
+:root[data-theme="dark"] {
+  --surface: #0c1317;
+  --surface-raised: #111b21;
+  --ink: #e9edef;
+  --ink-soft: #8696a0;
+  --line: #222e35;
+  --accent: #00a884;
+  --accent-strong: #00a884;
+  --accent-ink: #06231c;
+  /* Zona de chat (como WhatsApp oscuro) */
+  --chat-bg: #0b141a;
+  --chat-dots: rgba(255, 255, 255, 0.035);
+  --bubble-in: #202c33;
+  --bubble-in-ink: #e9edef;
+  --bubble-out: #005c4b;
+  --bubble-out-ink: #e9edef;
+  --tick: #53bdeb;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-body);
+  /* Audiencia 50+: cuerpo base más grande y con aire */
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Fondo de chat con puntitos sutiles (patrón tipo WhatsApp, sin imágenes) */
+.chat-surface {
+  background-color: var(--chat-bg);
+  background-image: radial-gradient(var(--chat-dots) 1px, transparent 1.4px);
+  background-size: 18px 18px;
+}
+
+/* Entradas suaves (MOTION 3): solo transform/opacity, con respeto total a
+   prefers-reduced-motion */
+@media (prefers-reduced-motion: no-preference) {
+  .rise-in {
+    animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .rise-in-late {
+    animation: rise-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+  }
+  @keyframes rise-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Hover sutil en tarjetas (interactividad discreta, respeta reduced-motion). */
+@media (prefers-reduced-motion: no-preference) {
+  .lift { transition: transform .2s ease, box-shadow .2s ease; }
+  .lift:hover { transform: translateY(-3px); }
+}
+
+/* Acordeón FAQ: flecha nativa fuera, icono propio */
+details.faq > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details.faq > summary::-webkit-details-marker {
+  display: none;
+}
+details.faq[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+.faq-chevron {
+  transition: transform 0.25s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .faq-chevron { transition: none; }
+}

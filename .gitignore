@@ -1,1 +1,13 @@
+# dependencias
+/node_modules
+# build de Next
+/.next
+/out
+# entorno (nunca subir secretos)
+.env*
+!.env*.example
+# varios
 .DS_Store
+*.log
+*.tsbuildinfo
+next-env.d.ts

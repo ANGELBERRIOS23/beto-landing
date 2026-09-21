@@ -1,37 +1,39 @@
 # Beto — Landing (piloto Guatemala)
 
-Landing estática de **Beto**, el asistente antifraude por WhatsApp para personas
-mayores de 50. Fork de la landing de TuConfIA, adaptada para Guatemala (en
-quetzales). Un producto de **TuConsejería AI**.
+Landing de **Beto**, el asistente antifraude por WhatsApp para personas mayores
+de 50. Es un **fork de la landing de TuConfIA** (mismo diseño minimalista, Next.js
++ Tailwind), adaptado para Guatemala: textos, **moneda en quetzales**, logo,
+nombre y país. Un producto de **TuConsejería AI**.
 
-> Por ahora **solo la landing**. La conexión con el número de WhatsApp, backend y
-> demás se conecta después.
+> Por ahora **solo la landing**. El número de WhatsApp, el backend y demás se
+> conectan después.
 
-## Contenido
-- `index.html` — la landing completa (autocontenida; Rubik desde Google Fonts).
-- `beto-logo.png` — logo del robot Beto (círculo, transparente).
-- `tuconsejeria-logo.png` — logo de la alianza.
-- `og.png` — miniatura para compartir (WhatsApp, redes, LinkedIn).
-- `Dockerfile` + `nginx.conf` — para publicar como sitio estático.
+## Stack
+- Next.js 15 (App Router) + Tailwind v4. Imagen Docker `standalone` para Easypanel.
+- Sin Supabase ni admin (se removieron: esto es solo la landing).
+- La demo del chat usa un **mock** en `app/api/analizar` (heurística simple, sin
+  backend real). Cuando se conecte el core, se reemplaza por el proxy real.
 
 ## Publicar en Easypanel (beto.tuconsejeria.com)
-1. **App desde Git**: fuente = este repo, rama `main`, Compilación = **Dockerfile**.
-2. **Puerto**: `80`.
+1. **App desde Git**: repo `ANGELBERRIOS23/beto-landing`, rama `main`,
+   Compilación = **Dockerfile**.
+2. **Puerto**: `3000`.
 3. **Dominios**: agrega `beto.tuconsejeria.com`
-   - Destino: **Protocolo HTTP**, **Puerto 80** (el HTTPS público lo pone Easypanel).
-   - Deja el **toggle HTTPS en ON** (candado Let's Encrypt).
+   - Destino: **Protocolo HTTP**, **Puerto 3000** (el HTTPS público lo pone
+     Easypanel; deja el **toggle HTTPS en ON**).
 4. Apunta el DNS de `beto.tuconsejeria.com` al servidor y espera el certificado.
 
 ## Conectar el número de WhatsApp (después)
-Edita `index.html`, al final, la variable:
-```js
-const WA_NUMERO = "";   // ej: "50212345678"  (código país 502, sin '+')
+Las variables `NEXT_PUBLIC_*` se incrustan al hacer build. En el servicio de
+Easypanel define:
 ```
-Con eso, todos los botones "Escribir por WhatsApp" quedan activos. Vuelve a
-desplegar (rebuild) para que tome el cambio.
+NEXT_PUBLIC_WHATSAPP_NUMBER=50212345678   # código país 502, sin "+"
+```
+y haz **re-deploy con rebuild**. Con eso, todos los botones "Escribir por
+WhatsApp" quedan activos. Sin la variable, el botón no rompe (queda inerte).
 
-## Ver en local
-Abre `index.html` en el navegador, o:
+## Desarrollo local
 ```bash
-python3 -m http.server 8000   # y entra a http://localhost:8000
+npm install
+npm run dev     # http://localhost:3000
 ```
