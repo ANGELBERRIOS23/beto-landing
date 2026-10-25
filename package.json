@@ -21,8 +21,11 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "postcss": "^8.4.47",
+    "postcss": "^8.5.31",
     "tailwindcss": "^4.1.0",
     "typescript": "^5"
+  },
+  "overrides": {
+    "postcss": "$postcss"
   }
 }
